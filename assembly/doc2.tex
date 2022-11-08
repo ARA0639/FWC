@@ -1,0 +1,88 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage[margin=0.4in]{geometry}
+\usepackage{karnaugh-map}
+\begin{document}
+\raggedright{\includegraphics[scale=0.8]{iith.png}} \hspace{12cm}\raggedleft FWC22084\vspace{8mm}\\ 
+ \centering \Large \textbf{ASSIGNMENT-1} \normalsize \vspace{15mm}
+\begin{multicols}{2}
+ \raggedright \large \textbf{Contents}\normalsize \vspace{2mm}
+\begin{itemize}
+ \raggedright \item Abstract \item Componnets Required \item Procedure\item K-Map
+\end{itemize}
+ \raggedright \large \textbf{Abstract:}\vspace{2mm}\\
+\raggedright This manual explains Karnaugh maps (Kmap) by finding the logic function for the given truth table.\vspace{4mm} \\
+\raggedright \large \textbf{Components Required:} \normalsize \vspace{2mm}
+\begin{center}
+    \label{tab:truthtable}
+    \setlength{\arrayrulewidth}{0.1mm}
+\setlength{\tabcolsep}{12pt}
+\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|c|}
+    \hline % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \textbf{S.No} & \textbf{Component} & \textbf{Number}\\
+      \hline
+	1. & Arduino & 1 \\
+	2. & Bread Board & 1 \\
+	3. & Jumer Wires(M-M) & 10 \\
+	4. & LED & 1 \\
+	5. & Resistor(150 ohm) & 1 \\ 
+      \hline
+   \end{tabular}
+ \end{center}
+\vspace{5mm} 
+ \raggedright \large \textbf{Procedure:} \normalsize \vspace{2mm}
+\\ 1. Given is a truth table with 3 different variables X,Y,Z. \vspace{2mm}
+\\ 2. connect X,Y,Z with the arduino pins, giving inputs by connecting them to ground and Vcc represting 'digital LOW' and 'digital HIGH' respectively. \vspace{2mm}
+\\ 3. Connect the output pin declared in the source code to one end of the resistor and connect the resistor's other end to the LED, with reference to the source code given below. \vspace{2mm}
+\\ \centering https://github.com/reshma0639/FWC-Assignment-1/blob/main/assembly/main.asm \vspace{2mm}
+\\ \raggedright 4. Now by taking different combination of inputs, check the output being 0 or 1 in regard with the LED off and on respectively. \vspace{2mm}
+\begin{center}
+    \label{tab:truthtable}
+    \setlength{\arrayrulewidth}{0.5mm}
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|l|c|r|l|c|}
+    \hline % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \textbf{X} & \textbf{Y} & \textbf{Z} & \textbf{FN(X,Y,Z)}\\
+      \hline
+      0 & 0 & 0 & 1\\
+\hline
+      0 & 0 & 1 & 1\\
+\hline
+      0 & 1 & 0 & 0\\
+\hline
+      0 & 1 & 1 & 0\\
+\hline
+      1 & 0 & 0 & 1\\
+\hline
+      1 & 0 & 1 & 0\\
+\hline
+      1 & 1 & 0 & 0\\
+\hline
+      1 & 1 & 1 & 1\\
+      \hline      
+   \end{tabular}
+ \end{center}
+\centering Table 1: Truth table \vspace{2mm}
+\\ \raggedright 5. Cross check the output with the above mentioned truth table for the corresponding input combination(X,Y,Z). \vspace{7mm}\\
+\raggedright \large \textbf{K-Map:} \normalsize \vspace{2mm}\\
+In the K-Map, the Implicant in boxes 2,3 result in $X+Y'$ ,the Implicant in boxes 2,6 result in $Y'+Z$ and the Implicant in box 5 result in $X'+Y+Z'$ .Thus giving FN being reduced to
+\begin{eqnarray*}
+FN =(X+Y')(Y'+Z)(X'+Y+Z')
+\end{eqnarray*}
+\begin{karnaugh-map}[4][2][1][$Z$][$Y$][$X$]
+\maxterms{2,3,5,6}
+\minterms{0,1,4,7}
+\implicant{3}{2}
+\implicant{2}{6}
+\implicant{5}{5}
+\end{karnaugh-map}
+\end{multicols}
+\end{document}
